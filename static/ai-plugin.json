@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "CSV Generator",
+    "name_for_model": "csv_generator",
+    "description_for_human": "Plugin for generating CSV",
+    "description_for_model": "This is a plugin designed to generate CSV files. You need to supply it with an array of arrays, which it will then convert into a CSV file. The plugin will then provide a publicly accessible link to download the file.\n\nYou should present the first five rows of the data in a Markdown table format to the user for review, ask if user want any changes, add/remove any columns and how many rows he want if he didn't already provided that or if you can proceed. If the user wants any changes, you can modify the data accordingly. Once the user is satisfied, send the final array of arrays to the plugin.\n\nThe plugin will then generate the file and provide a new download link. Remember to inform the user that the data shown in the table is only the structure and you will generate final csv file when user confirms the structure.\n\nIf the user requests further modifications to the data, you can make the changes and have the plugin generate a new file.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "http://localhost:3333/openapi.yaml",
+        "is_user_authenticated": false
+    },
+    "logo_url": "http://localhost:3333/logo.png",
+    "contact_email": "support@example.com",
+    "legal_info_url": "/legal"
+}

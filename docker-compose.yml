@@ -1,0 +1,10 @@
+version: '3'
+services:
+  express-app:
+    image: node:18
+    command: bash -c "npm install && npm start"
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    ports:
+      - "3333:3333"
