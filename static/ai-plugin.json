@@ -9,10 +9,10 @@
     },
     "api": {
         "type": "openapi",
-        "url": "http://localhost:3333/openapi.yaml",
+        "url": "https://csv-generator.lolman.xyz/openapi.yaml",
         "is_user_authenticated": false
     },
-    "logo_url": "http://localhost:3333/logo.png",
+    "logo_url": "https://csv-generator.lolman.xyz/logo.png",
     "contact_email": "support@example.com",
     "legal_info_url": "/legal"
 }
