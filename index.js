@@ -54,7 +54,7 @@ app.get('/legal', (req, res) => {
 });
 
 // Serve static files from the 'uploads' directory
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(uploadDirPath));
 
 // If debug mode is enabled, log all incoming requests
 if (debug) {
@@ -111,7 +111,7 @@ app.post('/generate-csv', (req, res) => {
         .write(data, { headers: true })
         .on('finish', function () {
             console.log(`CSV file successfully created at ${filePath}`);
-            res.json({ url: `${url}/${uploadDir}/${fileName}` });
+            res.json({ url: `${url}/uploads/${fileName}` });
         })
         .pipe(ws);
 });
