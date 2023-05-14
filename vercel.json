@@ -1,9 +1,17 @@
 {
     "version": 2,
+    "name": "csv-generator",
     "builds": [
-        {
-            "src": "package.json",
-            "use": "@vercel/node"
-        }
+      {
+        "src": "index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "index.js"
+      }
     ]
-}
+  }
+  
