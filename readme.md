@@ -1,6 +1,6 @@
-# ChatGPT Plugin for generating CSV Files
+# ChatGPT Plugin for generating Sheets
 
-Very simple plugin for generating CSV files directly from the chatbot.
+Very simple plugin for generating Excel Sheet files directly from the chatbot.
 
 ## Download for Local Use
 
@@ -28,8 +28,7 @@ CONTRIBUTION GUIDE HERE
 ## Features
 
 - [x] Generate CSV files
-- [ ] Generate XLSX files
-- [ ] Delete Files After 30 minutes
+- [x] Delete Files After 30 minutes
 - Feel free to add more features here
 
 

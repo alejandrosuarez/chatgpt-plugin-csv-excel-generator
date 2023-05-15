@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const fastcsv = require('fast-csv');
 const crypto = require('crypto');
 const dotenv = require('dotenv');
+const schedule = require('node-schedule');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -26,13 +27,69 @@ const app = express();
 // Enable CORS for all routes
 app.use(cors());
 
+
+// This function deletes a file
+function deleteFile(filePath) {
+    fs.unlink(filePath, (err) => {
+        if (err) {
+            console.error(`Error deleting file: ${err}`);
+        } else {
+            console.log(`File deleted: ${filePath}`);
+        }
+    });
+}
+
+// This function checks the files in the directory and deletes any that are older than 30 minutes
+function checkFiles() {
+    const directoryPath = uploadDirPath;
+
+    fs.readdir(directoryPath, (err, files) => {
+        if (err) {
+            console.error(`Error reading directory: ${err}`);
+            return;
+        }
+
+        files.forEach((file) => {
+            const filePath = path.join(directoryPath, file);
+
+            fs.stat(filePath, (err, stats) => {
+                if (err) {
+                    console.error(`Error getting file stats: ${err}`);
+                    return;
+                }
+
+                const now = Date.now();
+                const fileAge = now - stats.birthtimeMs;
+
+                // If the file is older than 30 minutes, delete it
+                if (fileAge > 1800000) {
+                    deleteFile(filePath);
+                }
+            });
+        });
+    });
+}
+
+// Schedule the checkFiles function to run every 30 minutes
+schedule.scheduleJob('*/30 * * * *', checkFiles);
+
 // Parse incoming request bodies
 app.use(express.json());
 app.use(bodyParser.json());
 
+// Serve index.html file
+app.get('/', (req, res) => {
+    res.sendFile(staticDir + '/index.html');
+});
+
 // Serve ai-plugin.json file
 app.get('/.well-known/ai-plugin.json', (req, res) => {
-    res.sendFile(staticDir + '/ai-plugin.json');
+    // get the ai-plugin.json file contents and replace all [URL_HERE] with the URL of the app
+    const aiPluginJson = fs.readFileSync(staticDir + '/ai-plugin.json', 'utf8');
+    const aiPluginJsonWithUrl = aiPluginJson.replace(/\[URL_HERE\]/g, url);
+    // set headers and send the file
+    res.setHeader('Content-Type', 'application/json');
+    res.send(aiPluginJsonWithUrl);
 });
 
 // Serve openapi.yaml file
