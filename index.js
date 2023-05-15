@@ -13,11 +13,8 @@ dotenv.config();
 const debug = process.env.DEBUG === 'true' || false;
 const port = process.env.PORT || 80;
 const domainName = process.env.DOMAIN_NAME || 'http://localhost';
-const uploadDir = process.env.UPLOAD_DIR || 'uploads';
-const logDir = process.env.LOG_DIR || 'logs';
-
-const uploadDirPath = path.join(__dirname, uploadDir);
-const logDirPath = path.join(__dirname, logDir);
+const uploadDirPath = process.env.UPLOAD_DIR || path.join(__dirname, 'uploads');
+const logDirPath = process.env.LOG_DIR || path.join(__dirname, 'logs');
 
 const url = (port === 80) ? domainName : `${domainName}:${port}`;
 
