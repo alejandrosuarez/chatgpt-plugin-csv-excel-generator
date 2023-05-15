@@ -16,7 +16,7 @@ const domainName = process.env.DOMAIN_NAME || 'http://localhost';
 const uploadDirPath = process.env.UPLOAD_DIR || path.join(__dirname, 'uploads');
 const logDirPath = process.env.LOG_DIR || path.join(__dirname, 'logs');
 
-const url = (port === 80) ? domainName : `${domainName}:${port}`;
+const url = (port === "80") ? domainName : `${domainName}:${port}`;
 
 const staticDir = path.join(__dirname, 'static');
 
