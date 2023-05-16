@@ -164,7 +164,6 @@ app.post('/generate-csv', (req, res) => {
     fastcsv
         .write(data, { headers: true })
         .on('finish', function () {
-            console.log(`CSV file successfully created at ${filePath}`);
             res.json({ url: `${url}/uploads/${fileName}` });
         })
         .pipe(ws);
